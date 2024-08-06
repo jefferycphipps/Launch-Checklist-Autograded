@@ -18,11 +18,50 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function validateInput(testInput) {
+    if (testInput === null || testInput === '')
+        return "Empty";
+    if(!isNaN(testInput))
+        return "Is a Number";
+    else 
+        return "Not a Number";
     
  }
  
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+    let flag = true;
+    console.log(pilot.value, copilot.value, fuelLevel.value, cargoLevel.value);
+    if(!(validateInput(pilot.value)==="Empty"||validateInput(pilot.value)==="Is a Number")){
+        document.getElementById("pilotStatus").innerHTML = `${pilot.value} is ready for launch.`;
+    }else{
+        alert("The pilot has to have a name.");
+        flag = false;
+    }
+    if(!(validateInput(copilot.value)==="Empty"||validateInput(copilot.value)==="Is a Number")){
+        document.getElementById("copilotStatus").innerHTML = `${copilot.value} is ready for launch.`;
+    }else{
+        alert("The co-pilot has to have a name.");
+        flag = false;
+    }
+    if(!(validateInput(fuelLevel.value)==="Empty"||validateInput(fuelLevel.value)==="Not a Number")){
+        if(fuelLevel.value<10000){
+            document.getElementById("fuelStatus").innerHTML = 'There is not enough fuel for the journey.'
+            document.getElementById("launchStatus").style.backgroundColor = 'red';
+        }
+    }else{
+        alert("The fuel value must be a number.");
+        flag = false;
+    }
+    if(!(validateInput(cargoLevel.value)==="Empty"||validateInput(cargoLevel.value)==="Not a Number")){
+        if(cargoLevel.value>10000){
+            document.getElementById("cargoStatus").innerHTML = 'There is too much mass to take off.'
+            document.getElementById("launchStatus").style.backgroundColor = 'red';
+        }
+    }else{
+        alert("The cargo status value must be a number.");
+        flag = false;
+    }
     
+    return flag;
  }
  
  async function myFetch() {
