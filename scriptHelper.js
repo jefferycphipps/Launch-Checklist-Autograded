@@ -15,6 +15,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                  </ol>
                  <img src="">
     */
+   const div = document.getElementById("missionTarget");
+   div.innerHTML = "";
     const h2 = document.createElement('h2');
     h2.innerHTML = "Mission Destination";
     document.getElementById("missionTarget").appendChild(h2);
@@ -58,10 +60,10 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-    let pilotV = validateInput(pilot.value);
-    let copilotV = validateInput(copilot.value);
-    let fuelV = validateInput(Number(fuelLevel.value));
-    let cargoV = validateInput(Number(cargoLevel.value));
+    let pilotV = validateInput(pilot);
+    let copilotV = validateInput(copilot);
+    let fuelV = validateInput(Number(fuelLevel));
+    let cargoV = validateInput(Number(cargoLevel));
     let pilotWords; 
     let copilotWords;
     let fuelWords;
@@ -69,31 +71,40 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     let vis;
     let status;
     let color;
+    const faulty = document.getElementById("faultyItems");
+    const launchStat = document.getElementById("launchStatus");
+    const pilotStat = document.getElementById("pilotStatus");
+    const copilotStat = document.getElementById("copilotStatus");
+    const fuelStat = document.getElementById("fuelStatus");
+    const cargoStat = document.getElementById("cargoStatus");
+
     if(pilotV==="Not a Number"){
-        pilotWords = `Pilot ${pilot.value} is ready for launch.`;
+        pilotWords = `Pilot ${pilot} is ready for launch.`;
     }else{
         if (pilotV==="Empty")
             return "The pilot should not be empty.";
         else
             return "The pilot shouldnt be a number.";
     }
+    
     if(copilotV==="Not a Number"){
-        copilotWords = `Co-pilot ${copilot.value} is ready for launch.`;
+        copilotWords = `Co-pilot ${copilot} is ready for launch.`;
     }else{
         if (copilotV==="Empty")
             return "The co-pilot should not be empty.";
         else
             return "The co-pilot shouldnt be a number.";
     }
+    
     if(fuelV==="Is a Number"){
-        if(Number(fuelLevel.value) < 10000){
-            fuelWords = 'There is not enough fuel for the journey.'
+        if(Number(fuelLevel) < 10000){
+            fuelWords = 'Fuel level too low for launch'
             color = "red";
-            status = "Shuttle not ready for launch."
+            status = "Shuttle Not Ready for Launch"
             vis = "visible";
         }else{
             color = 'green';
-            fuelWords = 'Fuel level high enough for launch.'
+            fuelWords = 'Fuel level high enough for launch'
             status = "Shuttle is ready for launch.";
             vis = "visible";
         }
@@ -103,15 +114,16 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         else
             return "The fuel value should be a number.";
     }
+    
     if(cargoV==="Is a Number"){
-        if(Number(cargoLevel.value)>10000){
-            cargoWords = 'There is too much mass to take off.'
+        if(Number(cargoLevel)>10000){
+            cargoWords = 'Cargo mass too heavy for launch'
             color = "red";
-            status = "Shuttle not ready for launch."
+            status = "Shuttle Not Ready for Launch"
             vis = "visible";
         }else{
             color = 'green';
-            cargoWords= 'Cargo mass low enough for launch.'
+            cargoWords= 'Cargo mass low enough for launch'
             status = "Shuttle is ready for launch.";
             vis = "visible";
         }
@@ -121,18 +133,19 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         else
             return "The cargo value should be a number.";
     }
-    if(Number(fuelLevel.value) < 10000||Number(cargoLevel.value)>10000){
+    
+    if(Number(fuelLevel) < 10000||Number(cargoLevel)>10000){
         color = "red";
-        status = "Shuttle not ready for launch."
+        status = "Shuttle Not Ready for Launch"
     }
 
-    document.getElementById("pilotStatus"),innerHTML = pilotWords;
-    document.getElementById("copilotStatus").innerHTML = copilotWords;
-    document.getElementById("launchStatus").style.color = color;
-    document.getElementById("fuelStatus").innerHTML = fuelWords;
-    document.getElementById("cargoStatus").innerHTML = cargoWords;
-    document.getElementById("launchStatus").innerHTML = status;
-    list.style.visibility = vis;
+    pilotStat.innerHTML = pilotWords;
+    copilotStat.innerHTML = copilotWords;
+    launchStat.style.color = color;
+    fuelStat.innerHTML = fuelWords;
+    cargoStat.innerHTML = cargoWords;
+    launchStat.innerHTML = status;
+    faulty.style.visibility = vis;
 
     return "";
 

@@ -1,27 +1,28 @@
 // Write your JavaScript code here!
 
-
-
 window.addEventListener("load", function() {
-
-    const pName = document.getElementById("pilotName");
-    const cName = document.getElementById("copilotName");
-    const fLevel = document.getElementById("fuelLevel");
-    const cMass = document.getElementById("cargoMass");
-    const submit = document.getElementById("formSubmit");
+    const form = document.querySelector("testForm");
     const shuttleList = document.getElementById("faultyItems");
-
+    const submit = document.getElementById("formSubmit");
+    let pName = document.querySelector("input[name=pilotName]");
+    let cName = document.querySelector("input[name=copilotName]");
+    let fLevel = document.querySelector("input[name=fuelLevel]");
+    let cMass = document.querySelector("input[name=cargoMass]");
 
     submit.addEventListener('click', function(event) {
-        submit.backgroundColor = 'red';
-        event.preventDefault();  
-        let alerter = formSubmission(document, shuttleList, pName, cName, fLevel, cMass);
-        if(alerter != ""||alerter === null){
+
+        let alerter = formSubmission(document, shuttleList, pName.value, cName.value, fLevel.value, cMass.value);
+        event.preventDefault();
+        if (alerter!=""){
+            event.preventDefault();
             alert(alerter);
         }
-        //let listedPlanetsResponse = myFetch();
         addDestinationInfo(document, "Tatooine","10465 km", "Tatoo I & Tatoo II", "43000 light years from galactic core", 3  ,"https://www.nasa.gov/wp-content/uploads/2023/03/earthsun20170412.png" );
     });
+    
+
+    //let listedPlanetsResponse = myFetch();
+   
     
     /*let listedPlanets = [];
     // Set listedPlanetsResponse equal to the value returned by calling myFetch()
