@@ -105,7 +105,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         }else{
             color = 'green';
             fuelWords = 'Fuel level high enough for launch'
-            status = "Shuttle is ready for launch.";
+            status = "Shuttle is Ready for Launch";
             vis = "visible";
         }
     }else{
@@ -124,7 +124,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         }else{
             color = 'green';
             cargoWords= 'Cargo mass low enough for launch'
-            status = "Shuttle is ready for launch.";
+            status = "Shuttle is Ready for Launch";
             vis = "visible";
         }
     }else{
@@ -153,22 +153,15 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  async function myFetch() {
-    /* let planetsReturned;
-    let index = 0;
-     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
-        response.json().then(function(json) {
-            planetsReturned[index].name = json[index].name;
-            planetsReturned[index].diameter = json[index].diameter;
-            planetsReturned[index].star = json[index].star;
-            planetsReturned[index].diameter = json[index].distance;
-            planetsReturned[index].image = json[index].image;
-            planetsReturned[index].moons = json[index].moons;
-            index++;
+    let planetsReturned;
+    let url = "https://handlers.education.launchcode.org/static/planets.json";
+     planetsReturned = await fetch(url).then( function(response) {
+        return response.json();
          });
-        console.log(planetsReturned);
-         });
-     return planetsReturned;*/
+     return planetsReturned;
  }
+
+
  function pickPlanet(planets) {
     return planets[Math.floor(Math.random()*planets.length)];
  }
