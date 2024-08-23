@@ -62,8 +62,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let pilotV = validateInput(pilot);
     let copilotV = validateInput(copilot);
-    let fuelV = validateInput(Number(fuelLevel));
-    let cargoV = validateInput(Number(cargoLevel));
+    let fuelV = validateInput(fuelLevel);
+    let cargoV = validateInput(cargoLevel);
     let pilotWords; 
     let copilotWords;
     let fuelWords;

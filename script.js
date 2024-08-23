@@ -12,12 +12,14 @@ window.addEventListener("load", function() {
     submit.addEventListener('click', function(event) {
 
         let alerter = formSubmission(document, shuttleList, pName.value, cName.value, fLevel.value, cMass.value);
-        event.preventDefault();
-        if (alerter!=""){
+        
+        if (alerter !=''){
             event.preventDefault();
             alert(alerter);
+            alerter = formSubmission(document, shuttleList, pName.value, cName.value, fLevel.value, cMass.value);
         }
-        
+
+        event.preventDefault();
         let listedPlanets;
         let planet;
         // Set listedPlanetsResponse equal to the value returned by calling myFetch()
